@@ -1,16 +1,13 @@
+<h1>Meal List</h1>
 
+<div class ="meal-list">
 @for (meal of mealList; track meal.id) {
-  <div class ="meal-card">
-    <h3> {{ meal.name }}</h3>
-    <p>{{ meal.calories }}</p>
-    <p>{{ meal.type }}</p>
+  <app-meal-list-item
+    [meal]="meal"
+    (opened) = "onMealOpened($event)"
+    ></app-meal-list-item>
 
-    @if (meal.ingredients != undefined){
-      <p>{{ meal.ingredients? 'Healthy' : 'Unhealthy' }}</p>
-    }
-
-    <p>{{ meal.category }}</p>
-  </div>
 } @empty {
   <p>No items found.</p>
 }
+</div>

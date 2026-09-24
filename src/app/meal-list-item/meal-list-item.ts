@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Meal } from '../shared/models/meal';
 
 @Component({
@@ -9,4 +9,12 @@ import { Meal } from '../shared/models/meal';
 })
 export class MealListItem {
   meal = input.required<Meal>();
+
+  expanded = false;
+  opened = output<Meal>();
+
+  toggle(): void {
+    this.expanded = !this.expanded;
+    this.opened.emit(this.meal());
+  }
 }

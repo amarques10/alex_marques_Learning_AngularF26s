@@ -1,1 +1,18 @@
-<p>meal-list-item works!</p>
+<div class="meal-card" (click) = toggle()>
+
+  <h3>{{meal().name}}</h3>
+  @switch (meal().category) {
+    @case ('Breakfast') {<span class="breakfast">Breakfast</span> }
+    @case ('Lunch') {<span class="lunch">Lunch</span> }
+    @case ('Dinner') {<span class="dinner"> Dinner</span> }
+    @default {<span class="badge">Other</span>}
+  }
+
+  @if (meal().type) {
+    <p>Meal is Healthy</p>
+  } @else {
+    <p>Meal is Unhealthy</p>
+  }
+
+</div>
+

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Meal } from '../shared/models/meal';
+import { MealListItem } from '../meal-list-item/meal-list-item';
 
 @Component({
   selector: 'app-meal-list',
-  imports: [],
+  imports: [MealListItem],
   templateUrl: './meal-list.html',
   styleUrl: './meal-list.scss',
 })
@@ -58,4 +59,8 @@ export class MealList {
       category: 'lunch',
     },
   ];
+
+  onMealOpened(meal: Meal): void {
+    console.warn("Opened ", meal.name)
+  }
 }
