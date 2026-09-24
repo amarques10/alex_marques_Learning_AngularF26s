@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Meal } from '../shared/models/meal';
 
 @Component({
   selector: 'app-meal-list-item',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './meal-list-item.html',
   styleUrl: './meal-list-item.scss',
 })
-export class MealListItem {}
+export class MealListItem {
+  meal = input.required<Meal>();
+}

@@ -2,21 +2,7 @@
 <div class = "container">
   <h2>Meal List</h2>
 
-  @for (meal of mealList; track meal.id) {
-    <div class ="meal-card">
-      <h3> {{ meal.name }}</h3>
-      <p>{{ meal.calories }}</p>
-      <p>{{ meal.type }}</p>
-
-      @if (meal.ingredients != undefined){
-        <p>{{ meal.ingredients? 'Healthy' : 'Unhealthy' }}</p>
-      }
-
-      <p>{{ meal.category }}</p>
-    </div>
-  } @empty {
-    <p>No items found.</p>
-  }
+<app-meal-list></app-meal-list>
 
 </div>
 
