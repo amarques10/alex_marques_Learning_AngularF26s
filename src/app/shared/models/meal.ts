@@ -2,7 +2,7 @@ export interface Meal {
   id: number;
   name: string;
   calories: number;
-  type?: string;
+  type?: boolean;
   ingredients: string[] | string;
   category: string;
 }
