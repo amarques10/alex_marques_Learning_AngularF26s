@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Meal } from '../shared/models/meal';
-import { MealListItem } from '../meal-list-item/meal-list-item';
+import { MealListItem, mealEvent } from '../meal-list-item/meal-list-item';
 
 @Component({
   selector: 'app-meal-list',
@@ -60,7 +60,7 @@ export class MealList {
     },
   ];
 
-  onMealOpened(meal: Meal): void {
-    console.warn("Opened ", meal.name)
+  onMealOpened(event: mealEvent): void {
+    console.log("Opened: ", event.id);
   }
 }

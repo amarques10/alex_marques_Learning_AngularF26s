@@ -11,10 +11,14 @@ export class MealListItem {
   meal = input.required<Meal>();
 
   expanded = false;
-  opened = output<Meal>();
+  opened = output<mealEvent>();
 
   toggle(): void {
     this.expanded = !this.expanded;
-    this.opened.emit(this.meal());
+    this.opened.emit( {id: this.meal().id, action: 'opened'});
   }
+}
+export interface mealEvent {
+  id: number;
+  action: 'opened' | 'favourited';
 }
