@@ -3,7 +3,7 @@ import { computed, Service, signal } from '@angular/core';
 
 @Service()
 export class MealService {
-  private mealList: signal <MealService[]> = ([
+  private meals: signal<MealService[]> = ([
     {
       id: 1,
       name: 'chicken parm',
@@ -54,6 +54,6 @@ export class MealService {
     },
   ]);
 
-  mealList = this.mealList.asReadonly();
+  mealList = this.meals.asReadonly();
 
 }

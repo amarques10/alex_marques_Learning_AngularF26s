@@ -1,7 +1,7 @@
 <h1>MealService List</h1>
 
 <div class ="meal-list">
-@for (meal of mealList; track meal.id) {
+@for (meal of mealList(); track meal.id) {
   <app-meal-list-item
     [meal]="meal"
     (opened) = "onMealOpened($event)"
