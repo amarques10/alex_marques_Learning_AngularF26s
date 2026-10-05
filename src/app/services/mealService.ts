@@ -4,7 +4,7 @@ import { Meal } from '../shared/models/meal';
 
 @Injectable()
 export class MealService {
-  private meals = signal<Meal[]> ([
+  private meals = signal<Meal[]>([
     {
       id: 1,
       name: 'chicken parm',
@@ -57,7 +57,7 @@ export class MealService {
 
   mealList = this.meals.asReadonly();
   mealCount = computed(() => this.meals().length);
-  mealFilter = computed(() => this.mealList().filter(b => b.type));
+  mealFilter = computed(() => this.mealList().filter((b) => b.type));
 
   addMeal(b: Meal): void {
     this.meals.update((list) => [...list, b]);
@@ -69,4 +69,7 @@ export class MealService {
     });
   }
 
+  remove(id: number) {
+    this.meals.update((list) => list.filter((i) => i.id !== id));
+  }
 }
