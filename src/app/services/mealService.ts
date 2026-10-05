@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { computed, Service, signal } from '@angular/core';
+import { computed, signal, effect } from '@angular/core';
 import { Meal } from '../shared/models/meal';
 
-@Service()
+@Injectable()
 export class MealService {
   private meals = signal<Meal[]> ([
     {
@@ -56,5 +56,17 @@ export class MealService {
   ]);
 
   mealList = this.meals.asReadonly();
+  mealCount = computed(() => this.meals().length);
+  mealFilter = computed(() => this.mealList().filter(b => b.type));
+
+  addMeal(b: Meal): void {
+    this.meals.update((list) => [...list, b]);
+  }
+
+  constructor() {
+    effect(() => {
+      console.log('Meal count is now ', this.mealCount());
+    });
+  }
 
 }
