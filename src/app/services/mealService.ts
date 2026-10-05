@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { computed, Service, signal } from '@angular/core';
+import { Meal } from '../shared/models/meal';
 
 @Service()
 export class MealService {
-  private meals: signal<MealService[]> = ([
+  private meals = signal<Meal[]> ([
     {
       id: 1,
       name: 'chicken parm',
