@@ -1,10 +1,14 @@
 <h1>MealService List</h1>
 
 <div class ="meal-list">
+
+  <p> {{ filteredCount() }} healthy meals match</p>
+
 @for (meal of mealList(); track meal.id) {
   <app-meal-list-item
     [meal]="meal"
     (opened) = "onMealOpened($event)"
+    (removed) = "handleMealEvent($event)"
     ></app-meal-list-item>
 
 } @empty {

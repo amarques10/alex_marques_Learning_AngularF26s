@@ -12,13 +12,19 @@ export class MealListItem {
 
   expanded = false;
   opened = output<mealEvent>();
+  removed = output<mealEvent>();
 
   toggle(): void {
     this.expanded = !this.expanded;
     this.opened.emit( {id: this.meal().id, action: 'opened'});
   }
+  remove(event: MouseEvent): void {
+    event.stopPropagation();
+
+    this.removed.emit({id: this.meal().id, action: 'removed'})
+  };
 }
 export interface mealEvent {
   id: number;
-  action: 'opened' | 'favourited';
+  action: 'opened' | 'favourited'| 'removed';
 }

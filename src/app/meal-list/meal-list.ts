@@ -14,7 +14,15 @@ private mealService = inject(MealService);
 
 protected mealList = this.mealService.mealList;
 
+protected filteredCount = this.mealService.filteredCount;
+
   onMealOpened(event: mealEvent): void {
     console.log("Opened: ", event.id);
+  }
+
+  handleMealEvent(event: mealEvent) {
+    if (event.action === 'removed') {
+      this.mealService.remove(event.id);
+    }
   }
 }
