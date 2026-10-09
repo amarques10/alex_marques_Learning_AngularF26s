@@ -2,10 +2,18 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { MEAL_CONFIG } from './shared/meal-config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    provideRouter(routes),
+    {
+      provide: MEAL_CONFIG,
+      useValue: {
+        apiBaseUrl: 'https://placeholder.example.com/api',
+        defaultCategory: 'all',
+      }
+    }
   ]
 };

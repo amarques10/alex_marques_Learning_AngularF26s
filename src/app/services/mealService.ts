@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { computed, signal, effect } from '@angular/core';
 import { Meal } from '../shared/models/meal';
+import { MEAL_CONFIG } from '../shared/meal-config';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class MealService {
+  private config = inject(MEAL_CONFIG);
+
   private meals = signal<Meal[]>([
     {
       id: 1,
@@ -57,8 +60,9 @@ export class MealService {
 
   mealList = this.meals.asReadonly();
   mealCount = computed(() => this.meals().length);
-  mealFilter = computed(() => this.mealList().filter((b) => b.type));
+  mealFilter = computed(() => this.mealList().filter((b) => this.config.defaultCategory));
   filteredCount = computed(() => this.mealFilter().length);
+  readonly defaultCategory = this.config.defaultCategory; // 9b?
 
   addMeal(b: Meal): void {
     this.meals.update((list) => [...list, b]);
