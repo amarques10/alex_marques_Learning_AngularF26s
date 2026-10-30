@@ -1,0 +1,18 @@
+<h2>{{ isEditMode() ? 'Edit Meal' : 'Add Brewery' }}</h2>
+
+<form class="meal-form" [formGroup]="mealForm" (ngSubmit)="onSubmit()">
+
+  <label>
+    Name
+    <input type="text" formControlName="name"/>
+  </label>
+
+  @if (mealForm.controls.name.touched && mealForm.controls.city.invalid) {
+    <p class="error">Name is required and must be at least 2 characters</p>
+  }
+
+  <label>
+
+  </label>
+
+</form>
