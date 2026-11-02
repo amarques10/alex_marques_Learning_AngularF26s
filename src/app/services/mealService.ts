@@ -38,7 +38,7 @@ export class MealService {
       calories: 1050,
       type: false,
       ingredients: ['pasta', 'tomato sauce'],
-      category: 'Dinner',
+      category: 'dinner',
     },
     {
       id: 5,
@@ -68,13 +68,25 @@ export class MealService {
     this.meals.update((list) => [...list, b]);
   }
 
-  constructor() {
-    effect(() => {
-      console.log('Meal count is now ', this.mealCount());
-    });
+  updateMeal(updated: Meal): void {
+  this.meals.update((list) => list.map((b) => (b.id === updated.id ? updated : b)));
   }
 
   remove(id: number) {
     this.meals.update((list) => list.filter((i) => i.id !== id));
+  }
+
+  nextId(): number {
+    return Math.max(0, ...this.meals().map((b) => b.id)) + 1;
+  }
+
+  getById(id: number): Meal | undefined {
+    return this.meals().find((b) => b.id === id);
+  }
+
+  constructor() {
+    effect(() => {
+      console.log('Meal count is now ', this.mealCount());
+    });
   }
 }

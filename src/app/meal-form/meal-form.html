@@ -5,14 +5,31 @@
   <label>
     Name
     <input type="text" formControlName="name"/>
+
   </label>
 
-  @if (mealForm.controls.name.touched && mealForm.controls.city.invalid) {
+  @if (mealForm.controls.name.touched && mealForm.controls.name.invalid) {
     <p class="error">Name is required and must be at least 2 characters</p>
   }
 
   <label>
+    Calories
+    <input type="text" formControlName="calories"/>
+  </label>
+  @if (mealForm.controls.calories.touched && mealForm.controls.calories.invalid) {
+    <p class="error">Total calories is required.</p>
+  }
 
+  <label>
+    Category
+    <select formControlName="category">
+      <option value="breakfast">Breakfast</option>
+      <option value="lunch">Lunch</option>
+      <option value="dinner">Dinner</option>
+    </select>
   </label>
 
+  <button type="submit" [disabled]="mealForm.invalid">
+    {{ isEditMode() ? 'Save Changes' : 'Add Brewery'}}
+  </button>
 </form>

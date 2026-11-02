@@ -5,6 +5,9 @@
   <p> {{ filteredCount() }} healthy meals match</p>
 
 @for (meal of mealList(); track meal.id) {
+  <a [routerLink]="['/meals', meal.id]">
+    {{ meal.name }}
+  </a>
   <app-meal-list-item
     [meal]="meal"
     (opened) = "onMealOpened($event)"

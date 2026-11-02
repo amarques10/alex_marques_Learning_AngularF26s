@@ -1,1 +1,24 @@
-<p>meal-detail works!</p>
+@if (meal(); as m) {
+  <article class = "detail">
+    <h2>{{ m.name }}</h2>
+    <p>Calories: {{ m.calories }}</p>
+    <p>Category: {{ m.category }}</p>
+    @if (m.type) {
+      <p>Food is healthy</p>
+    } @else {
+      <p>Food is unhealthy</p>
+    }
+    
+
+    <div class="actions">
+      <a [routerLink]="['/edit', m.id]">Edit</a>
+      <button type="button" class="delete-button" (click)="onDelete(m.id)">Delete</button>
+    </div>
+
+  </article>
+  
+  <a routerLink="/meals">Back to all the meals</a>
+} @else {
+  <p>No meal with id {{ id() }}.</p>
+  <a routerLink="/meals">back to all breweries</a>
+}
