@@ -1,8 +1,7 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MealService } from '../services/mealService';
 import { Router } from '@angular/router';
-import { form } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-meal-form',
@@ -19,10 +18,12 @@ export class MealForm {
   protected isEditMode = computed(() => this.id() !== undefined);
 
   mealForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(2)]],
+    name: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
     calories: [0, [Validators.required, Validators.min(1)]],
     category: ['breakfast'],
     ingredients: ['', Validators.required],
+    }, {
+      validators: breakfastCaloriesValidator
   });
 
   constructor() {
@@ -62,4 +63,29 @@ export class MealForm {
     this.mealForm.reset();
     this.router.navigate(['/meals', id]);
   }
+}
+
+function noWhitespaceValidator(
+  control: AbstractControl
+): ValidationErrors | null {
+
+  const value = control.value;
+
+  if (typeof value === 'string' && value.length > 0 && value.trim().length === 0) {
+    return { whitespace: true};
+  }
+  return null;
+}
+
+function breakfastCaloriesValidator(
+  control: AbstractControl
+): ValidationErrors | null {
+
+  const category = control.get('category')?.value;
+  const calories = control.get('calories')?.value;
+
+  if (category === 'breakfast' && calories > 1000) {
+    return { breakfastCalories: true };
+  }
+  return null;
 }

@@ -16,6 +16,10 @@
     @if (mealForm.controls.name.hasError('minlength')) {
       <p class="error">Meal name must be at least 2 characters.</p>
     }
+
+    @if (mealForm.controls.name.hasError('whitespace')) {
+      <p class="error">Meal name cannot contain only spaces.</p>
+    }
   }
 
   <label>
@@ -40,6 +44,11 @@
       <option value="dinner">Dinner</option>
     </select>
   </label>
+  @if (mealForm.controls.category.touched && mealForm.controls.calories.touched &&
+  mealForm.hasError('breakfastCalories')
+    ) {
+    <p class="error">Breakfast meals cannot exceed 1,000 calories</p>
+  }
 
   <label>
     Ingredients
