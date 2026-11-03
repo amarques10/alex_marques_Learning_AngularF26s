@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MealService } from '../services/mealService';
 import { Router } from '@angular/router';
@@ -24,6 +24,27 @@ export class MealForm {
     category: ['breakfast'],
     ingredients: ['', Validators.required],
   });
+
+  constructor() {
+    effect(() => {
+      const id = this.id();
+
+      if(id !== undefined) {
+        const meal = this.mealService.getById(Number(id));
+
+        if(meal) {
+          this.mealForm.patchValue({
+            name: meal.name,
+            calories: meal.calories,
+            category: meal.category,
+            ingredients: Array.isArray(meal.ingredients)
+            ? meal.ingredients.join(', ')
+              : meal.ingredients
+          });
+        }
+      }
+    });
+  }
 
   protected onSubmit(): void {
     console.log('Submit clicked. Form valid:', this.mealForm.valid);
