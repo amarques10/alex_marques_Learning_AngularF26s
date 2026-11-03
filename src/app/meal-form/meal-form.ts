@@ -18,28 +18,27 @@ export class MealForm {
   id = input<string>();
   protected isEditMode = computed(() => this.id() !== undefined);
 
-  mealForm = this.fb.group({
+  mealForm = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
-    calories: ['', Validators.required],
+    calories: [0, [Validators.required, Validators.min(1)]],
     category: ['breakfast'],
+    ingredients: ['', Validators.required],
   });
-}
 
   protected onSubmit(): void {
+    console.log('Submit clicked. Form valid:', this.mealForm.valid);
     if (this.mealForm.invalid) return;
+
+    const formValue = this.mealForm.getRawValue();
+    const id = this.isEditMode() ? Number(this.id()) : this.mealService.nextId();
+
+    if (this.isEditMode()) {
+      this.mealService.updateMeal({ id, ...formValue });
+    } else {
+      this.mealService.addMeal({ id, ...formValue });
+    }
+
+    this.mealForm.reset();
+    this.router.navigate(['/meals', id]);
   }
-
-  const formValue = this.mealForm.getRawValue();
-  const id = this.isEditMode() ? Number(this.id()) : this.mealService.nextId();
-
-  if (this.isEditMode()) {
-    this.mealService.updateMeal({ id, ...formValue });
-} @else {
-  this.mealService.addMeal({ id, ...formValue});
 }
-
-  this.mealForm.reset();
-  this.router.navigate(['/meal', id]);
-
-
-

@@ -8,7 +8,7 @@
     } @else {
       <p>Food is unhealthy</p>
     }
-    
+
 
     <div class="actions">
       <a [routerLink]="['/edit', m.id]">Edit</a>
@@ -16,9 +16,9 @@
     </div>
 
   </article>
-  
+
   <a routerLink="/meals">Back to all the meals</a>
 } @else {
   <p>No meal with id {{ id() }}.</p>
-  <a routerLink="/meals">back to all breweries</a>
+  <a routerLink="/meals">back to all meals</a>
 }

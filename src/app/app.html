@@ -2,12 +2,17 @@
 <div class = "container">
   <h2>MealService List</h2>
 
-<app-meal-list></app-meal-list>
+  <nav>
+    <a routerLink="/meals">All Meals</a>
+    <a routerLink="/add">Add Meal</a>
+  </nav>
+
+  <router-outlet />
 
 </div>
 
 
-<router-outlet />
+
 
 <!-- Test Commit -->
 

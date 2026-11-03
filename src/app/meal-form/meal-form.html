@@ -1,4 +1,4 @@
-<h2>{{ isEditMode() ? 'Edit Meal' : 'Add Brewery' }}</h2>
+<h2>{{ isEditMode() ? 'Edit Meal' : 'Add Meal' }}</h2>
 
 <form class="meal-form" [formGroup]="mealForm" (ngSubmit)="onSubmit()">
 
@@ -8,16 +8,28 @@
 
   </label>
 
-  @if (mealForm.controls.name.touched && mealForm.controls.name.invalid) {
-    <p class="error">Name is required and must be at least 2 characters</p>
+  @if (mealForm.controls.name.touched) {
+    @if (mealForm.controls.name.hasError('required')) {
+      <p class="error">Meal name is required</p>
+    }
+
+    @if (mealForm.controls.name.hasError('minlength')) {
+      <p class="error">Meal name must be at least 2 characters.</p>
+    }
   }
 
   <label>
     Calories
-    <input type="text" formControlName="calories"/>
+    <input type="number" formControlName="calories"/>
   </label>
-  @if (mealForm.controls.calories.touched && mealForm.controls.calories.invalid) {
-    <p class="error">Total calories is required.</p>
+  @if (mealForm.controls.calories.touched) {
+    @if (mealForm.controls.calories.hasError('required')) {
+      <p class="error">Calories are required.</p>
+    }
+
+    @if (mealForm.controls.calories.hasError('min')) {
+      <p class="error">Calories must be greater than zero.</p>
+    }
   }
 
   <label>
@@ -29,7 +41,17 @@
     </select>
   </label>
 
+  <label>
+    Ingredients
+    <input type="text" formControlName="ingredients" />
+  </label>
+  @if (mealForm.controls.ingredients.touched &&
+  mealForm.controls.ingredients.hasError('required')) {
+  <p class="error">Ingredients are required.</p>
+  }
+
+
   <button type="submit" [disabled]="mealForm.invalid">
-    {{ isEditMode() ? 'Save Changes' : 'Add Brewery'}}
+    {{ isEditMode() ? 'Save Changes' : 'Add Meal'}}
   </button>
 </form>

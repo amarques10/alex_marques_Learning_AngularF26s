@@ -54,4 +54,16 @@ export class MockMealService {
   remove(id: number) {
     this.meals.update((list) => list.filter((i) => i.id !== id));
   }
+
+  updateMeal(updated: Meal): void {
+    this.meals.update((list) => list.map((b) => (b.id === updated.id ? updated : b)));
+  }
+
+  nextId(): number {
+    return Math.max(0, ...this.meals().map((b) => b.id)) + 1;
+  }
+
+  getById(id: number): Meal | undefined {
+    return this.meals().find((b) => b.id === id);
+  }
 }

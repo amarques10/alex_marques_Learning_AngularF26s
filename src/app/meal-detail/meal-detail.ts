@@ -15,6 +15,11 @@ export class MealDetail {
   id = input.required<string>();
 
   protected meal = computed(() =>
-    this.mealService.mealList().find(m => m.id === (Number(this.id()))
-    );
+    this.mealService.getById(Number(this.id()))
+  );
+
+  protected onDelete(id: number): void {
+    this.mealService.remove(id);
+    this.router.navigate(['/meals']);
+  }
 }
