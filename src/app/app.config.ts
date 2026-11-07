@@ -13,12 +13,13 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MEAL_CONFIG,
       useValue: {
-        apiBaseUrl: 'https://placeholder.example.com/api',
+        apiBaseUrl: 'https://www.themealdb.com/', // This is where the DB is called.
         defaultCategory: 'all',
-      }
+      },
     },
     {
-      provide: MealService, useClass: MockMealService,
-    }
-  ]
+      provide: MealService,
+      useClass: MockMealService,
+    },
+  ],
 };

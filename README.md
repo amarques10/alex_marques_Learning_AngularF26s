@@ -2,6 +2,11 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
 
+## API Used
+The API that will be used for this webpage is TheMealDB. The documentation for this DB can be found here: https://www.themealdb.com/documentation.
+
+Here is also an example of a request that has been made on the DB: https://www.themealdb.com/meal/53046-portuguese-custard-tarts-recipe.
+
 ## Development server
 
 To start a local development server, run:
