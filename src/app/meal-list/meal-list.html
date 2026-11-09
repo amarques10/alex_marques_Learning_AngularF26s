@@ -4,9 +4,9 @@
 
   <p> {{ filteredCount() }} healthy meals match</p>
 
-@for (meal of mealList(); track meal.id) {
-  <a [routerLink]="['/meals', meal.id]">
-    {{ meal.name }}
+@for (meal of mealList(); track meal.idMeal) {
+  <a [routerLink]="['/meals', meal.idMeal]">
+    {{ meal.strMeal }}
   </a>
   <app-meal-list-item
     [meal]="meal"

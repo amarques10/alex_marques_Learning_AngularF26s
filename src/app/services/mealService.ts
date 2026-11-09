@@ -9,52 +9,68 @@ export class MealService {
 
   private meals = signal<Meal[]>([
     {
-      id: 1,
-      name: 'chicken parm',
-      calories: 785,
-      type: true,
-      ingredients: ['chicken', 'pasta', 'cheese', 'tomato sauce'],
-      category: 'dinner',
+      // chicken parm
+      idMeal: '1',
+      strMeal: 'chicken parm',
+      strCategory: 'Omnivore',
+      strArea: 'Italian',
+      strCountry: 'Italy',
+      strInstructions:
+        'Bread the chicken, in breadcrumb seasoning and egg. Pan fry on a skillet at 350-400F for 2-4 mins per side until golden brown.',
+      strTags: 'Dinner',
     },
     {
-      id: 2,
-      name: 'bacalhau a bras',
-      calories: 1050,
-      type: true,
-      ingredients: ['codfish', 'potato', 'onion', 'egg'],
-      category: 'dinner',
+      // bacalhau a bras
+      idMeal: '2',
+      strMeal: 'bacalhau a bras',
+      strCategory: 'omnivore',
+      strArea: 'Portuguese',
+      strCountry: 'Portugal',
+      strInstructions:
+        'Peel apart the codfish like pulled pork, and boil the codfish and fry the french fries. Once completed remove the water used to boil, add the french fries, and add whisked egg and chopped onions. Cook and stir until the egg is cooked into the food.',
+      strTags: 'Dinner',
     },
     {
-      id: 3,
-      name: 'steak and eggs',
-      calories: 1590,
-      type: true,
-      ingredients: ['steak', 'egg', 'hashbrown'],
-      category: 'breakfast',
+      // steak and eggs
+      idMeal: '3',
+      strMeal: 'steak and eggs',
+      strCategory: 'carnivore',
+      strArea: 'Australian',
+      strCountry: 'Australia',
+      strInstructions:
+        'Season the steak, sear in a pan for 3-5 mins per side until a golden crust forms. Fry a overeasy egg and place ontop the steak.',
+      strTags: 'Dinner',
     },
     {
-      id: 4,
-      name: 'pasta',
-      calories: 1050,
-      type: false,
-      ingredients: ['pasta', 'tomato sauce'],
-      category: 'dinner',
+      // pasta
+      idMeal: '4',
+      strMeal: 'pasta',
+      strCategory: 'vegan',
+      strArea: 'Italian',
+      strCountry: 'Italy',
+      strInstructions:
+        'Use 4-6 quarts of water per pound of pasta, bring to a rolling boil and add 1 tablespoon of salt. Drop the Pasta in and stir til cooked. Use pasta water and freshly boiled tomatoes to create the sauce. Mix the pasta and sauce together.',
+      strTags: 'lunch',
     },
     {
-      id: 5,
-      name: 'grilled cheese',
-      calories: 1224,
-      type: false,
-      ingredients: ['bread', 'cheese', 'butter'],
-      category: 'lunch',
+      // grilled cheese
+      idMeal: '5',
+      strMeal: 'grilled cheese',
+      strCategory: 'omnivore',
+      strArea: 'english',
+      strCountry: 'united kingdom',
+      strInstructions: 'Pre heat a skillet, apply butter to both sides of the bread. Place your bread into the skillet, as a crust begins to form add the cheese to the bread and form the sandwich.',
+      strTags: 'lunch',
     },
     {
-      id: 6,
-      name: 'chicken garden salad',
-      calories: 850,
-      type: true,
-      ingredients: ['chicken', 'lettuce', 'tomato', 'carrots', 'cucumber'],
-      category: 'lunch',
+      // chicken garden salad
+      idMeal: '6',
+      strMeal: 'chicken garden salad',
+      strCategory: 'omnivore',
+      strArea: 'greek',
+      strCountry: 'greece',
+      strInstructions: 'Begin by cooking the boneless skinless chicken breasts. As the chicken cooks, prepare your salad ingredients, by cutting ingredients like tomatoes, onions, lettuce, and cucumbers. When the chicken is finished cut the chicken and serve with the salad.',
+      strTags: 'lunch',
     },
   ]);
 
@@ -69,19 +85,15 @@ export class MealService {
   }
 
   updateMeal(updated: Meal): void {
-  this.meals.update((list) => list.map((b) => (b.id === updated.id ? updated : b)));
+    this.meals.update((list) => list.map((b) => (b.idMeal === updated.idMeal ? updated : b)));
   }
 
-  remove(id: number) {
-    this.meals.update((list) => list.filter((i) => i.id !== id));
+  remove(id: string) {
+    this.meals.update((list) => list.filter((i) => i.idMeal !== id));
   }
 
-  nextId(): number {
-    return Math.max(0, ...this.meals().map((b) => b.id)) + 1;
-  }
-
-  getById(id: number): Meal | undefined {
-    return this.meals().find((b) => b.id === id);
+  getById(id: string): Meal | undefined {
+    return this.meals().find((b) => b.idMeal === id);
   }
 
   constructor() {

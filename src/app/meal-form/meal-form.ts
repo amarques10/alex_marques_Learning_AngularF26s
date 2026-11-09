@@ -17,30 +17,34 @@ export class MealForm {
   id = input<string>();
   protected isEditMode = computed(() => this.id() !== undefined);
 
-  mealForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
-    calories: [0, [Validators.required, Validators.min(1)]],
-    category: ['breakfast'],
-    ingredients: ['', Validators.required],
-    }, {
-      validators: breakfastCaloriesValidator
-  });
+  // Sets the rules for the properties of the form.
+  mealForm = this.fb.nonNullable.group(
+    {
+      strMeal: ['', [Validators.required, Validators.minLength(2), this.noWhitespaceValidator]],
+      strCategory: ['', [Validators.required, this.noWhitespaceValidator]],
+      strArea: ['Country'],
+      strCountry: ['', [Validators.required, this.noWhitespaceValidator]],
+      strInstructions: ['', [Validators.required, this.noWhitespaceValidator]],
+      strTags: ['', this.noWhitespaceValidator],
+    },
+  );
 
+  // Logic to construct a new meal into the webpage if ID doesn't exist
   constructor() {
     effect(() => {
       const id = this.id();
 
-      if(id !== undefined) {
-        const meal = this.mealService.getById(Number(id));
+      if (id !== undefined) {
+        const meal = this.mealService.getById(id);
 
-        if(meal) {
+        if (meal) {
           this.mealForm.patchValue({
-            name: meal.name,
-            calories: meal.calories,
-            category: meal.category,
-            ingredients: Array.isArray(meal.ingredients)
-            ? meal.ingredients.join(', ')
-              : meal.ingredients
+            strMeal: meal.strMeal,
+            strCategory: meal.strCategory,
+            strArea: meal.strArea,
+            strCountry: meal.strCountry,
+            strInstructions: meal.strInstructions,
+            strTags: meal.strTags,
           });
         }
       }
@@ -52,40 +56,27 @@ export class MealForm {
     if (this.mealForm.invalid) return;
 
     const formValue = this.mealForm.getRawValue();
-    const id = this.isEditMode() ? Number(this.id()) : this.mealService.nextId();
+    const idMeal = this.id() ?? crypto.randomUUID();
 
     if (this.isEditMode()) {
-      this.mealService.updateMeal({ id, ...formValue });
+      this.mealService.updateMeal({ idMeal, ...formValue });
     } else {
-      this.mealService.addMeal({ id, ...formValue });
+      this.mealService.addMeal({ idMeal, ...formValue });
     }
 
     this.mealForm.reset();
-    this.router.navigate(['/meals', id]);
+    this.router.navigate(['/meals', idMeal]);
   }
+
+  protected noWhitespaceValidator(control: AbstractControl) {
+
+    const value = control.value;
+
+    if (typeof value === 'string' && value.length > 0 && value.trim().length === 0) {
+      return { whitespace : true };
+    }
+    return null;
+  }
+
 }
 
-function noWhitespaceValidator(
-  control: AbstractControl
-): ValidationErrors | null {
-
-  const value = control.value;
-
-  if (typeof value === 'string' && value.length > 0 && value.trim().length === 0) {
-    return { whitespace: true};
-  }
-  return null;
-}
-
-function breakfastCaloriesValidator(
-  control: AbstractControl
-): ValidationErrors | null {
-
-  const category = control.get('category')?.value;
-  const calories = control.get('calories')?.value;
-
-  if (category === 'breakfast' && calories > 1000) {
-    return { breakfastCalories: true };
-  }
-  return null;
-}

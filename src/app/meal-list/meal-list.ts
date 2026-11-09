@@ -18,12 +18,12 @@ export class MealList {
   protected filteredCount = this.mealService.filteredCount;
 
   onMealOpened(event: mealEvent): void {
-    console.log('Opened: ', event.id);
+    console.log('Opened: ', event.idMeal);
   }
 
   handleMealEvent(event: mealEvent) {
     if (event.action === 'removed') {
-      this.mealService.remove(event.id);
+      this.mealService.remove(event.idMeal);
     }
   }
 }

@@ -1,17 +1,17 @@
 <div class="meal-card" (click) = toggle()>
 
-  <h3>{{meal().name}}</h3>
-  @switch (meal().category) {
+  <h3>{{meal().idMeal}}</h3>
+  @switch (meal().strCategory) {
     @case ('Breakfast') {<span class="breakfast">Breakfast</span> }
     @case ('Lunch') {<span class="lunch">Lunch</span> }
     @case ('Dinner') {<span class="dinner"> Dinner</span> }
     @default {<span class="badge">Other</span>}
   }
 
-  @if (meal().type) {
-    <p>MealService is Healthy</p>
+  @if (meal().strTags) {
+    <p>{{ meal().strTags }}</p>
   } @else {
-    <p>MealService is Unhealthy</p>
+    <p>Meal has no tags</p>
   }
 
   <button (click) = "remove($event);">Remove</button>

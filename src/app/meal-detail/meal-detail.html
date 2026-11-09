@@ -1,18 +1,21 @@
 @if (meal(); as m) {
   <article class = "detail">
-    <h2>{{ m.name }}</h2>
-    <p>Calories: {{ m.calories }}</p>
-    <p>Category: {{ m.category }}</p>
-    @if (m.type) {
-      <p>Food is healthy</p>
+    <h2>{{ m.strMeal }}</h2>
+    <p>Calories: {{ m.strCategory }}</p>
+    <p>Category: {{ m.strArea }}</p>
+    <p>Food Origin: {{ m.strArea }}</p>
+    <p>Country: {{ m.strCountry }}</p>
+    <p>Instructions: {{ m.strInstructions }}</p>
+    @if (m.strTags) {
+      <p>{{ m.strTags }}</p>
     } @else {
-      <p>Food is unhealthy</p>
+      <p>No tags available</p>
     }
 
 
     <div class="actions">
-      <a [routerLink]="['/edit', m.id]">Edit</a>
-      <button type="button" class="delete-button" (click)="onDelete(m.id)">Delete</button>
+      <a [routerLink]="['/edit', m.idMeal]">Edit</a>
+      <button type="button" class="delete-button" (click)="onDelete(m.idMeal)">Delete</button>
     </div>
 
   </article>

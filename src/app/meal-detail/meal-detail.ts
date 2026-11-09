@@ -15,10 +15,10 @@ export class MealDetail {
   id = input.required<string>();
 
   protected meal = computed(() =>
-    this.mealService.getById(Number(this.id()))
+    this.mealService.getById(this.id())
   );
 
-  protected onDelete(id: number): void {
+  protected onDelete(id: string): void {
     this.mealService.remove(id);
     this.router.navigate(['/meals']);
   }

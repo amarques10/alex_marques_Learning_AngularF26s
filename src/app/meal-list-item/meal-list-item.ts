@@ -16,15 +16,15 @@ export class MealListItem {
 
   toggle(): void {
     this.expanded = !this.expanded;
-    this.opened.emit( {id: this.meal().id, action: 'opened'});
+    this.opened.emit( {idMeal: this.meal().idMeal, action: 'opened'});
   }
   remove(event: MouseEvent): void {
     event.stopPropagation();
 
-    this.removed.emit({id: this.meal().id, action: 'removed'})
+    this.removed.emit({idMeal: this.meal().idMeal, action: 'removed'})
   };
 }
 export interface mealEvent {
-  id: number;
+  idMeal: string;
   action: 'opened' | 'favourited'| 'removed';
 }

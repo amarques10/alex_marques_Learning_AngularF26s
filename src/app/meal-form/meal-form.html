@@ -4,59 +4,80 @@
 
   <label>
     Name
-    <input type="text" formControlName="name"/>
+    <input type="text" formControlName="strMeal"/>
 
   </label>
 
-  @if (mealForm.controls.name.touched) {
-    @if (mealForm.controls.name.hasError('required')) {
+  @if (mealForm.controls.strMeal.touched) {
+    @if (mealForm.controls.strMeal.hasError('required')) {
       <p class="error">Meal name is required</p>
     }
 
-    @if (mealForm.controls.name.hasError('minlength')) {
+    @if (mealForm.controls.strMeal.hasError('minlength')) {
       <p class="error">Meal name must be at least 2 characters.</p>
     }
 
-    @if (mealForm.controls.name.hasError('whitespace')) {
+    @if (mealForm.controls.strMeal.hasError('whitespace')) {
       <p class="error">Meal name cannot contain only spaces.</p>
     }
   }
 
   <label>
-    Calories
-    <input type="number" formControlName="calories"/>
+    Type
+    <input type="text" formControlName="strCategory"/>
   </label>
-  @if (mealForm.controls.calories.touched) {
-    @if (mealForm.controls.calories.hasError('required')) {
-      <p class="error">Calories are required.</p>
+  @if (mealForm.controls.strCategory.touched) {
+    @if (mealForm.controls.strCategory.hasError('required')) {
+      <p class="error">Type is required.</p>
     }
 
-    @if (mealForm.controls.calories.hasError('min')) {
-      <p class="error">Calories must be greater than zero.</p>
+    @if (mealForm.controls.strCategory.hasError('whitespace')) {
+      <p class="error">Type cannot contain only spaces.</p>
     }
   }
 
   <label>
-    Category
-    <select formControlName="category">
-      <option value="breakfast">Breakfast</option>
-      <option value="lunch">Lunch</option>
-      <option value="dinner">Dinner</option>
-    </select>
+    Food Origin
+    <input type="text" formControlName="strArea"/>
   </label>
-  @if (mealForm.controls.category.touched && mealForm.controls.calories.touched &&
-  mealForm.hasError('breakfastCalories')
-    ) {
-    <p class="error">Breakfast meals cannot exceed 1,000 calories</p>
+  @if (mealForm.controls.strArea.touched && mealForm.controls.strArea.touched) {
+    <p class="error">Origin of food is required.</p>
   }
 
   <label>
-    Ingredients
-    <input type="text" formControlName="ingredients" />
+    Country
+    <input type="text" formControlName="strCountry" />
   </label>
-  @if (mealForm.controls.ingredients.touched &&
-  mealForm.controls.ingredients.hasError('required')) {
-  <p class="error">Ingredients are required.</p>
+  @if (mealForm.controls.strCountry.touched &&
+  mealForm.controls.strCountry.hasError('required')) {
+  <p class="error">Representative country of meal is required.</p>
+  }
+
+  <label>
+    Instructions
+    <input type="text" formControlName="strInstructions" />
+  </label>
+  @if (mealForm.controls.strMeal.touched) {
+
+    @if (mealForm.controls.strMeal.hasError('required')) {
+      <p class="error">Meal name is required</p>
+    }
+
+    @if (mealForm.controls.strMeal.hasError('whitespace')) {
+      <p class="error">Meal name cannot contain only spaces.</p>
+    }
+  }
+
+  <label>
+    Country
+    <input type="text" formControlName="strTags" />
+  </label>
+
+  @if (mealForm.controls.strMeal.touched) {
+
+    @if (mealForm.controls.strMeal.hasError('whitespace')) {
+      <p class="error">Meal name cannot contain only spaces.</p>
+    }
   }
 
 
