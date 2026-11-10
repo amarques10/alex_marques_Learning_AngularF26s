@@ -14,8 +14,12 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MEAL_CONFIG,
       useValue: {
-        apiBaseUrl: 'https://www.themealdb.com/', // This is where the DB is called.
-        defaultCategory: 'all',
+        apiBaseUrl: 'https://www.themealdb.com/api/json/v1/', // This is where the DB is called.
+        defaultCategory: '1',
+
+        GET /meals
+
+
       },
     },
     // HttpClient is already provided by default. This call is only here to add the inteceptor.

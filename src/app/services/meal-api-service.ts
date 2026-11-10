@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { MEAL_CONFIG } from '../shared/meal-config';
 import { Meal } from '../shared/models/meal';
@@ -10,7 +10,20 @@ import { catchError, Observable, of, pipe, retry } from 'rxjs';
 export class MealApiService {
   private http = inject(HttpClient);
   private config = inject(MEAL_CONFIG);
-  private url = `${this.config.apiBaseUrl}/1/`;
+  private url = `${this.config.apiBaseUrl}/1`;
+  private contents = signal<Meal[]>([]);
+  error = signal<string | null>(null);
+
+  constructor() { this.load(); }
+
+  load() {
+    this.http.get<Meal[]>(`${this.config.apiBaseUrl}/1`, {
+      params: { limit: 20 },
+    }).subscribe({
+      next: (list) => this.contents.set(list),
+      error: () => this.error.set('Could not load data'),
+    });
+  }
 
   // HttpClient: returns cold Observables
   search(query: string, perPage = 20): Observable<Meal[]> {
@@ -26,9 +39,10 @@ export class MealApiService {
     );
   }
 
+
   // httpResource factories: call from field intializer ----
 
-  byCountry(strCountry: Signal<string>) {
+  byCountry(strCountry: signal<string>) {
     return httpResource<Meal[]>(
       () => {
         const value = strCountry().trim();
@@ -38,7 +52,7 @@ export class MealApiService {
     );
   }
 
-  byCategory(strCategory: Signal<string>) {
+  byCategory(strCategory: signal<string>) {
     return httpResource<Meal[]>(
       () => ({
         url: this.url,
@@ -48,11 +62,11 @@ export class MealApiService {
     );
   }
 
-  byId(idMeal: Signal<string>) {
+  byId(idMeal: signal<string>) {
     return httpResource<Meal[]>(() => `${this.url}/${idMeal()}`);
   }
 
-  byIds(ids: Signal<string[]>) {
+  byIds(ids: signal<string[]>) {
     return httpResource<Meal[]>(
       () => (ids().length ? { url: this.url, params: { by_ids: ids().join(',') } } : undefined),
       { defaultValue: [] },
