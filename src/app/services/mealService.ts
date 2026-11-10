@@ -10,7 +10,7 @@ export class MealService {
   private meals = signal<Meal[]>([
     {
       // chicken parm
-      idMeal: '1',
+      idMeal: 'local-1',
       strMeal: 'chicken parm',
       strCategory: 'Omnivore',
       strArea: 'Italian',
@@ -21,7 +21,7 @@ export class MealService {
     },
     {
       // bacalhau a bras
-      idMeal: '2',
+      idMeal: 'local-2',
       strMeal: 'bacalhau a bras',
       strCategory: 'omnivore',
       strArea: 'Portuguese',
@@ -32,7 +32,7 @@ export class MealService {
     },
     {
       // steak and eggs
-      idMeal: '3',
+      idMeal: 'local-3',
       strMeal: 'steak and eggs',
       strCategory: 'carnivore',
       strArea: 'Australian',
@@ -43,7 +43,7 @@ export class MealService {
     },
     {
       // pasta
-      idMeal: '4',
+      idMeal: 'local-4',
       strMeal: 'pasta',
       strCategory: 'vegan',
       strArea: 'Italian',
@@ -54,7 +54,7 @@ export class MealService {
     },
     {
       // grilled cheese
-      idMeal: '5',
+      idMeal: 'local-5',
       strMeal: 'grilled cheese',
       strCategory: 'omnivore',
       strArea: 'english',
@@ -64,7 +64,7 @@ export class MealService {
     },
     {
       // chicken garden salad
-      idMeal: '6',
+      idMeal: 'local-6',
       strMeal: 'chicken garden salad',
       strCategory: 'omnivore',
       strArea: 'greek',

@@ -58,4 +58,12 @@ export class MealApiService {
       { defaultValue: [] },
     );
   }
+
+  updateMeal(updated: Meal): void {
+    this.meals.update((list) => list.map((b) => (b.idMeal === updated.idMeal ? updated : b)));
+  }
+
+  remove(id: string) {
+    this.meals.update((list) => list.filter((i) => i.idMeal !== id));
+  }
 }

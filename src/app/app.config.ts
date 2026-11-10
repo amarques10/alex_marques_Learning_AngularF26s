@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { MEAL_CONFIG } from './shared/meal-config';
 import { MealService } from './services/mealService';
 import { MockMealService } from './services/mock-meal-service';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,9 +18,8 @@ export const appConfig: ApplicationConfig = {
         defaultCategory: 'all',
       },
     },
-    {
-      provide: MealService,
-      useClass: MockMealService,
-    },
+    // HttpClient is already provided by default. This call is only here to add the inteceptor.
+
+    provideHttpClient(withInterceptors([loggingInterceptor])), // this must have been required earlier except for logging inteceptor.
   ],
 };

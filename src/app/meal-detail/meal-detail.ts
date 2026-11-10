@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MealService } from '../services/mealService';
+import { MealApiService } from '../services/meal-api-service';
 
 @Component({
   selector: 'app-meal-detail',
@@ -9,17 +10,17 @@ import { MealService } from '../services/mealService';
   styleUrl: './meal-detail.scss',
 })
 export class MealDetail {
-  private mealService = inject(MealService);
-  private router = inject(Router);
+  private api = inject(MealApiService);
+  protected store = inject(MealService);
 
+  // Filled from the :id route parameter by withComponentInputBinding().
+  // The API uses string UUIDs, so the id is passed through as is.
   id = input.required<string>();
 
-  protected meal = computed(() =>
-    this.mealService.getById(this.id())
-  );
+  meal = this.api.byId(this.id);
 
   protected onDelete(id: string): void {
-    this.mealService.remove(id);
-    this.router.navigate(['/meals']);
+    this.api.remove(id);
+    this.router.navigate(['/1']);
   }
 }
