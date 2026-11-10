@@ -1,20 +1,20 @@
-<h1>MealService List</h1>
+<h2>Meals from {{ strCountry() }}</h2>
 
-<div class ="meal-list">
 
-  <p> {{ filteredCount() }} healthy meals match</p>
-
-@for (meal of mealList(); track meal.idMeal) {
-  <a [routerLink]="['/meals', meal.idMeal]">
-    {{ meal.strMeal }}
-  </a>
-  <app-meal-list-item
-    [meal]="meal"
-    (opened) = "onMealOpened($event)"
-    (removed) = "handleMealEvent($event)"
-    ></app-meal-list-item>
-
-} @empty {
-  <p>No items found.</p>
-}
+<div class="search-bar">
+  <input #c [value]="strCountry()" (keyup.enter)="strCountry.set(c.value)" aria-label="Country" />
+  <button type="button" (click)="strCountry.set(c.value)">Search</button>
 </div>
+
+@if (meals.isLoading()) {
+  <p>Loading Meals...</p>
+} @else if (meals.error()) {
+  <p class="error">Could not load meals. Check your connection.</p>
+  <button type="button" (click)="meals.reload()">Try again</button>
+} @else {
+  @for (m of meals.value(); track m.idMeal) {
+    <app-meal-list-item [meal]="m" (opened)="onMealOpened($event)" />
+  } @empty {
+    <p>No meals found from {{ strCountry() }}.</p>
+  }
+}

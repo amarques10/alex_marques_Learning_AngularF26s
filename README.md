@@ -7,6 +7,13 @@ The API that will be used for this webpage is TheMealDB. The documentation for t
 
 Here is also an example of a request that has been made on the DB: https://www.themealdb.com/meal/53046-portuguese-custard-tarts-recipe.
 
+I chose to use option A HttpClient and Observables. 
+One of the reasons I chose to do so is because it was the first option. 
+I also felt like HttpClient had more examples to go off of. 
+I also felt like I understood the HttpClient & Observables 
+slightly more even if it seemed a little more difficult. 
+I enjoyed the challenge.
+
 ## Development server
 
 To start a local development server, run:

@@ -1,0 +1,19 @@
+<h2>Search Meals</h2>
+
+<div class="search-bar">
+  <input #term placeholder="Name, city, or keyword" aria-label="Search term" (keyup.enter) ="runSearch(term.value)" />
+  <button type="button" (click)="runSearch(term.value)">Search</button>
+</div>
+
+@if (loading()) {
+  <p>Searching...</p>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+} @else {
+  @for (m of results(); track m.idMeal) {
+    <app-meal-list-item [meal]="m" />
+  } @empty {
+    <p>No results yet. Enter a search term above.</p>
+  }
+}
+

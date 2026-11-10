@@ -1,8 +1,10 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { Meal } from '../shared/models/meal';
 import { MealListItem, mealEvent } from '../meal-list-item/meal-list-item';
 import { MealService} from '../services/mealService';
 import { RouterLink } from '@angular/router';
+import { MealApiService } from '../services/meal-api-service';
+import { MEAL_CONFIG } from '../shared/meal-config';
 
 @Component({
   selector: 'app-meal-list',
@@ -11,19 +13,16 @@ import { RouterLink } from '@angular/router';
   styleUrl: './meal-list.scss',
 })
 export class MealList {
-  private mealService = inject(MealService);
+  private api = inject(MealApiService);
 
-  protected mealList = this.mealService.mealList;
+  strCountry = signal(inject(MEAL_CONFIG).defaultCategory);
 
-  protected filteredCount = this.mealService.filteredCount;
+  // httpResource reruns the request every time country() changes.
+  meals = this.api.byCountry(this.strCountry);
 
-  onMealOpened(event: mealEvent): void {
-    console.log('Opened: ', event.idMeal);
+  protected onMealOpened(meal: mealEvent): void {
+    console.log('Meal opened:', meal);
   }
 
-  handleMealEvent(event: mealEvent) {
-    if (event.action === 'removed') {
-      this.mealService.remove(event.idMeal);
-    }
-  }
+
 }
