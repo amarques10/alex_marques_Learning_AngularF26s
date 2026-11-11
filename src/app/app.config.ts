@@ -6,6 +6,7 @@ import { MEAL_CONFIG } from './shared/meal-config';
 import { MealService } from './services/mealService';
 import { MockMealService } from './services/mock-meal-service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loggingInterceptor } from './interceptor/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,10 +15,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MEAL_CONFIG,
       useValue: {
-        apiBaseUrl: 'https://www.themealdb.com/api/json/v1/', // This is where the DB is called.
-        defaultCategory: '1',
+        apiBaseUrl: 'https://www.themealdb.com/api/json/v1/1/', // This is where the DB is called.
+        // defaultCategory: '1',
 
-        GET /meals
+
 
 
       },

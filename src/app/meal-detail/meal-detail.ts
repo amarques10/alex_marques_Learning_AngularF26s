@@ -19,8 +19,8 @@ export class MealDetail {
 
   meal = this.api.byId(this.id);
 
-  protected onDelete(id: string): void {
-    this.api.remove(id);
-    this.router.navigate(['/1']);
-  }
+  // protected onDelete(id: string): void {
+  //   this.api.remove(id);
+  //   this.router.navigate(['/1']);
+  // }
 }

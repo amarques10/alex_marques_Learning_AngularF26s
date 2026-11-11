@@ -46,9 +46,9 @@ export class MockMealService {
 
   mealList = this.meals.asReadonly();
   mealCount = computed(() => this.meals().length);
-  mealFilter = computed(() => this.mealList().filter((b) => this.config.defaultCategory));
-  filteredCount = computed(() => this.mealFilter().length);
-  readonly defaultCategory = this.config.defaultCategory; // 9b?
+  // // mealFilter = computed(() => this.mealList().filter((b) => this.config.defaultCategory));
+  // filteredCount = computed(() => this.mealFilter().length);
+  // readonly defaultCategory = this.config.defaultCategory; // 9b?
 
   addMeal(b: Meal): void {
     this.meals.update((list) => [...list, b]);

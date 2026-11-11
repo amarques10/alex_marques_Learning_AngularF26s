@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, Signal, signal } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { MEAL_CONFIG } from '../shared/meal-config';
 import { Meal } from '../shared/models/meal';
@@ -10,7 +10,7 @@ import { catchError, Observable, of, pipe, retry } from 'rxjs';
 export class MealApiService {
   private http = inject(HttpClient);
   private config = inject(MEAL_CONFIG);
-  private url = `${this.config.apiBaseUrl}/1`;
+  private url = `${this.config.apiBaseUrl}`;
   private contents = signal<Meal[]>([]);
   error = signal<string | null>(null);
 
@@ -42,7 +42,7 @@ export class MealApiService {
 
   // httpResource factories: call from field intializer ----
 
-  byCountry(strCountry: signal<string>) {
+  byCountry(strCountry: Signal<string>) {
     return httpResource<Meal[]>(
       () => {
         const value = strCountry().trim();
@@ -52,7 +52,7 @@ export class MealApiService {
     );
   }
 
-  byCategory(strCategory: signal<string>) {
+  byCategory(strCategory: Signal<string>) {
     return httpResource<Meal[]>(
       () => ({
         url: this.url,
@@ -62,22 +62,22 @@ export class MealApiService {
     );
   }
 
-  byId(idMeal: signal<string>) {
+  byId(idMeal: Signal<string>) {
     return httpResource<Meal[]>(() => `${this.url}/${idMeal()}`);
   }
 
-  byIds(ids: signal<string[]>) {
+  byIds(ids: Signal<string[]>) {
     return httpResource<Meal[]>(
       () => (ids().length ? { url: this.url, params: { by_ids: ids().join(',') } } : undefined),
       { defaultValue: [] },
     );
   }
 
-  updateMeal(updated: Meal): void {
-    this.meals.update((list) => list.map((b) => (b.idMeal === updated.idMeal ? updated : b)));
-  }
-
-  remove(id: string) {
-    this.meals.update((list) => list.filter((i) => i.idMeal !== id));
-  }
+  // updateMeal(updated: Meal): void {
+  //   this.meals.update((list) => list.map((b) => (b.idMeal === updated.idMeal ? updated : b)));
+  // }
+  //
+  // remove(id: string) {
+  //   this.meals.update((list) => list.filter((i) => i.idMeal !== id));
+  // }
 }

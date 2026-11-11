@@ -1,4 +1,4 @@
-@if (meal(); as m) {
+@if (meal.value()?.[0]; as m) {
   <article class = "detail">
     <h2>{{ m.strMeal }}</h2>
     <p>Calories: {{ m.strCategory }}</p>
@@ -15,7 +15,7 @@
 
     <div class="actions">
       <a [routerLink]="['/edit', m.idMeal]">Edit</a>
-      <button type="button" class="delete-button" (click)="onDelete(m.idMeal)">Delete</button>
+<!--      <button type="button" class="delete-button" (click)="onDelete(m.idMeal)">Delete</button>-->
     </div>
 
   </article>

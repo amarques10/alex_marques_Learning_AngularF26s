@@ -5,6 +5,7 @@ import { MealService} from '../services/mealService';
 import { RouterLink } from '@angular/router';
 import { MealApiService } from '../services/meal-api-service';
 import { MEAL_CONFIG } from '../shared/meal-config';
+import { config } from 'rxjs';
 
 @Component({
   selector: 'app-meal-list',
@@ -14,8 +15,9 @@ import { MEAL_CONFIG } from '../shared/meal-config';
 })
 export class MealList {
   private api = inject(MealApiService);
+  private config = inject(MEAL_CONFIG);
 
-  strCountry = signal(inject(MEAL_CONFIG).defaultCategory);
+  strCountry = signal<string>('Portugal');
 
   // httpResource reruns the request every time country() changes.
   meals = this.api.byCountry(this.strCountry);
@@ -23,6 +25,4 @@ export class MealList {
   protected onMealOpened(meal: mealEvent): void {
     console.log('Meal opened:', meal);
   }
-
-
 }
