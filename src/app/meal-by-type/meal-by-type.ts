@@ -10,5 +10,5 @@ import { MealApiService } from '../services/meal-api-service';
 export class MealByType {
   private api = inject(MealApiService);
   type = input.required<string>();
-  meals = this.api.byCategory(this.type);
+  // meals = this.api.byCategory(this.type);
 }

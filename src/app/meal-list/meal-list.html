@@ -1,20 +1,25 @@
-<h2>Meals from {{ strCountry() }}</h2>
+<h2>Meals from {{ strArea() }}</h2>
 
 
 <div class="search-bar">
-  <input #c [value]="strCountry()" (keyup.enter)="strCountry.set(c.value)" aria-label="Country" />
-  <button type="button" (click)="strCountry.set(c.value)">Search</button>
+  <input #c [value]="strArea()" (keyup.enter)="strArea.set(c.value); search()" aria-label="Area" />
+  <button type="button" (click)="strArea.set(c.value); search()">Search</button>
 </div>
 
-@if (meals.isLoading()) {
-  <p>Loading Meals...</p>
-} @else if (meals.error()) {
-  <p class="error">Could not load meals. Check your connection.</p>
-  <button type="button" (click)="meals.reload()">Try again</button>
+@if (isLoading()) {
+  <p>Loading...</p>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+  <button type="button" (click)="search()">Try Again</button>
 } @else {
-  @for (m of meals.value(); track m.idMeal) {
-    <app-meal-list-item [meal]="m" (opened)="onMealOpened($event)" />
+  @for ( m of meals(); track m.idMeal) {
+    <app-meal-list-item
+      [meal]="m"
+      (opened)="onMealOpened($event)"
+      (removed)="handleMealEvent($event)"
+    />
   } @empty {
-    <p>No meals found from {{ strCountry() }}.</p>
+    <p>No meals found from {{ strArea() }}.</p>
   }
 }
+

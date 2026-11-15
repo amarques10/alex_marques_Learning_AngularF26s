@@ -1,5 +1,5 @@
 import { Component, computed, effect, inject, input } from '@angular/core';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MealService } from '../services/mealService';
 import { Router } from '@angular/router';
 
@@ -20,12 +20,11 @@ export class MealForm {
   // Sets the rules for the properties of the form.
   mealForm = this.fb.nonNullable.group(
     {
-      strMeal: ['', [Validators.required, Validators.minLength(2), this.noWhitespaceValidator]],
-      strCategory: ['', [Validators.required, this.noWhitespaceValidator]],
-      strArea: ['Country'],
-      strCountry: ['', [Validators.required, this.noWhitespaceValidator]],
-      strInstructions: ['', [Validators.required, this.noWhitespaceValidator]],
-      strTags: ['', this.noWhitespaceValidator],
+      strMeal: ['', [Validators.required, Validators.minLength(2), noWhitespaceValidator]],
+      strCategory: ['', [Validators.required, noWhitespaceValidator]],
+      strArea: ['Origin'],
+      strInstructions: ['', [Validators.required, noWhitespaceValidator]],
+      strTags: ['', noWhitespaceValidator],
     },
   );
 
@@ -40,11 +39,10 @@ export class MealForm {
         if (meal) {
           this.mealForm.patchValue({
             strMeal: meal.strMeal,
-            strCategory: meal.strCategory,
-            strArea: meal.strArea,
-            strCountry: meal.strCountry,
-            strInstructions: meal.strInstructions,
-            strTags: meal.strTags,
+            strCategory: meal.strCategory ?? '',
+            strArea: meal.strArea ?? '',
+            strInstructions: meal.strInstructions ?? '',
+            strTags: meal.strTags ?? '',
           });
         }
       }
@@ -56,7 +54,7 @@ export class MealForm {
     if (this.mealForm.invalid) return;
 
     const formValue = this.mealForm.getRawValue();
-    const idMeal = this.id() ?? crypto.randomUUID();
+    const idMeal = this.id() ?? `local-${crypto.randomUUID()}`;
 
     if (this.isEditMode()) {
       this.mealService.updateMeal({ idMeal, ...formValue });
@@ -68,15 +66,13 @@ export class MealForm {
     this.router.navigate(['/meals', idMeal]);
   }
 
-  protected noWhitespaceValidator(control: AbstractControl) {
-
-    const value = control.value;
-
-    if (typeof value === 'string' && value.length > 0 && value.trim().length === 0) {
-      return { whitespace : true };
-    }
-    return null;
-  }
-
 }
+function noWhitespaceValidator(control: AbstractControl) {
 
+  const value = control.value;
+
+  if (typeof value === 'string' && value.length > 0 && value.trim().length === 0) {
+    return { whitespace : true };
+  }
+  return null;
+}

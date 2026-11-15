@@ -1,19 +1,27 @@
 <div class="meal-card" (click) = toggle()>
 
-  <h3>{{meal().idMeal}}</h3>
-  @switch (meal().strCategory) {
-    @case ('Breakfast') {<span class="breakfast">Breakfast</span> }
-    @case ('Lunch') {<span class="lunch">Lunch</span> }
-    @case ('Dinner') {<span class="dinner"> Dinner</span> }
-    @default {<span class="badge">Other</span>}
+  <h3>{{meal().strMeal}}</h3>
+
+  @if (meal().strMealThumb; as imageUrl_) {
+    <img class="meal-image"
+         [src]="imageUrl_"
+         [alt]="meal().strMeal" />
+  }
+
+  @if (meal().strCategory) {
+    <p>Category: {{ meal().strCategory }}</p>
+  }
+
+  @if (meal().strArea) {
+    <p>Origin: {{ meal().strArea}}</p>
   }
 
   @if (meal().strTags) {
-    <p>{{ meal().strTags }}</p>
-  } @else {
-    <p>Meal has no tags</p>
+    <p>Tags: {{ meal().strTags }}</p>
   }
 
-  <button (click) = "remove($event);">Remove</button>
+  <a [routerLink]="['/meals', meal().idMeal]">View Details</a>
+
+  <button type="button" (click) = "remove($event);">Remove</button>
 </div>
 

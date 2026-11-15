@@ -1,83 +1,34 @@
-import { inject, Injectable, Signal, signal } from '@angular/core';
-import { HttpClient, httpResource } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { MEAL_CONFIG } from '../shared/meal-config';
 import { Meal } from '../shared/models/meal';
-import { catchError, Observable, of, pipe, retry } from 'rxjs';
+import { map, Observable } from 'rxjs';
+
+interface MealApiResponse {
+  meals: Meal[] | null;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class MealApiService {
+
   private http = inject(HttpClient);
   private config = inject(MEAL_CONFIG);
-  private url = `${this.config.apiBaseUrl}`;
-  private contents = signal<Meal[]>([]);
-  error = signal<string | null>(null);
 
-  constructor() { this.load(); }
-
-  load() {
-    this.http.get<Meal[]>(`${this.config.apiBaseUrl}/1`, {
-      params: { limit: 20 },
-    }).subscribe({
-      next: (list) => this.contents.set(list),
-      error: () => this.error.set('Could not load data'),
-    });
+  byArea (area: string): Observable<Meal[]> {
+    return this.http.get<MealApiResponse>(
+      `${this.config.apiBaseUrl}filter.php`,
+      { params: { a: area }}
+    ).pipe(map(response => response.meals ?? []));
   }
 
-  // HttpClient: returns cold Observables
-  search(query: string, perPage = 20): Observable<Meal[]> {
-    return this.http.get<Meal[]>(`${this.url}/search`, {
-      params: { query, per_page: perPage },
-    });
+  byId (id: string): Observable<Meal | null> {
+    return this.http.get<MealApiResponse>(
+      `${this.config.apiBaseUrl}lookup.php`,
+      { params: { i: id } }
+    ).pipe(map(response => response.meals?.[0] ?? null));
   }
-
-  getById(id: string): Observable<Meal | null> {
-    return this.http.get<Meal>(`${this.url}/${id}`).pipe(
-      retry(2),
-      catchError(() => of(null)),
-    );
-  }
-
-
-  // httpResource factories: call from field intializer ----
-
-  byCountry(strCountry: Signal<string>) {
-    return httpResource<Meal[]>(
-      () => {
-        const value = strCountry().trim();
-        return value ? { url: this.url, params: { by_Country: value, per_page: 30 } } : undefined;
-      },
-      { defaultValue: [] },
-    );
-  }
-
-  byCategory(strCategory: Signal<string>) {
-    return httpResource<Meal[]>(
-      () => ({
-        url: this.url,
-        params: { by_strCategory: strCategory(), per_page: 20 },
-      }),
-      { defaultValue: [] },
-    );
-  }
-
-  byId(idMeal: Signal<string>) {
-    return httpResource<Meal[]>(() => `${this.url}/${idMeal()}`);
-  }
-
-  byIds(ids: Signal<string[]>) {
-    return httpResource<Meal[]>(
-      () => (ids().length ? { url: this.url, params: { by_ids: ids().join(',') } } : undefined),
-      { defaultValue: [] },
-    );
-  }
-
-  // updateMeal(updated: Meal): void {
-  //   this.meals.update((list) => list.map((b) => (b.idMeal === updated.idMeal ? updated : b)));
-  // }
-  //
-  // remove(id: string) {
-  //   this.meals.update((list) => list.filter((i) => i.idMeal !== id));
-  // }
 }
+
+

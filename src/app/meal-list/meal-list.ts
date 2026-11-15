@@ -1,28 +1,33 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
-import { Meal } from '../shared/models/meal';
+import { Component, inject, signal } from '@angular/core';
 import { MealListItem, mealEvent } from '../meal-list-item/meal-list-item';
 import { MealService} from '../services/mealService';
-import { RouterLink } from '@angular/router';
-import { MealApiService } from '../services/meal-api-service';
 import { MEAL_CONFIG } from '../shared/meal-config';
-import { config } from 'rxjs';
 
 @Component({
   selector: 'app-meal-list',
-  imports: [MealListItem, RouterLink],
+  imports: [MealListItem],
   templateUrl: './meal-list.html',
   styleUrl: './meal-list.scss',
 })
 export class MealList {
-  private api = inject(MealApiService);
+  private mealService = inject(MealService);
   private config = inject(MEAL_CONFIG);
 
-  strCountry = signal<string>('Portugal');
+  strArea = signal<string>('Portuguese');
 
-  // httpResource reruns the request every time country() changes.
-  meals = this.api.byCountry(this.strCountry);
+  meals = this.mealService.mealList;
+  isLoading = this.mealService.isLoading;
+  error = this.mealService.error;
+
+  protected search(): void {
+    this.mealService.loadByArea(this.strArea());
+  }
 
   protected onMealOpened(meal: mealEvent): void {
     console.log('Meal opened:', meal);
+  }
+
+  protected handleMealEvent(meal: mealEvent): void {
+    console.log('Meal removed: ', meal);
   }
 }

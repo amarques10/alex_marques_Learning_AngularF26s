@@ -15,7 +15,6 @@ export class MockMealService {
       strMeal: 'chicken parm',
       strCategory: 'Omnivore',
       strArea: 'Italian',
-      strCountry: 'Italy',
       strInstructions:
         'Bread the chicken, in breadcrumb seasoning and egg. Pan fry on a skillet at 350-400F for 2-4 mins per side until golden brown.',
       strTags: 'Dinner',
@@ -26,7 +25,6 @@ export class MockMealService {
       strMeal: 'bacalhau a bras',
       strCategory: 'omnivore',
       strArea: 'Portuguese',
-      strCountry: 'Portugal',
       strInstructions:
         'Peel apart the codfish like pulled pork, and boil the codfish and fry the french fries. Once completed remove the water used to boil, add the french fries, and add whisked egg and chopped onions. Cook and stir until the egg is cooked into the food.',
       strTags: 'Dinner',
@@ -37,7 +35,6 @@ export class MockMealService {
       strMeal: 'steak and eggs',
       strCategory: 'carnivore',
       strArea: 'Australian',
-      strCountry: 'Australia',
       strInstructions:
         'Season the steak, sear in a pan for 3-5 mins per side until a golden crust forms. Fry a overeasy egg and place ontop the steak.',
       strTags: 'Dinner',

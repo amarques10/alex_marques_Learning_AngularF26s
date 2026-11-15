@@ -1,16 +1,36 @@
-@if (meal.value()?.[0]; as m) {
+@if (isLoading()) {
+  <p>Loading meal details...</p>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+} @else if (meal(); as m) {
   <article class = "detail">
     <h2>{{ m.strMeal }}</h2>
-    <p>Calories: {{ m.strCategory }}</p>
-    <p>Category: {{ m.strArea }}</p>
-    <p>Food Origin: {{ m.strArea }}</p>
-    <p>Country: {{ m.strCountry }}</p>
-    <p>Instructions: {{ m.strInstructions }}</p>
-    @if (m.strTags) {
+
+    @if (m.strMealThumb) {
+      <img [src]="m.strMealThumb"
+           [alt]="m.strMeal" />
+    }
+
+    @if (m.strCategory){ <!--Displays the category only if the category is defined-->
+      <p>Category: {{ m.strCategory }}</p>
+    }
+
+    @if (m.strArea) { <!--Displays the Area only if the value is defined-->
+      <p>Origin: {{ m.strArea }}</p>
+    }
+
+    @if (m.strInstructions) { <!--Displays the instructions only if the value is defined.-->
+      <h2>Cooking Instructions</h2>
+      <p>Instructions: {{ m.strInstructions }}</p>
+    }
+
+    @if (m.strTags) { <!--Displays the tags if they are defined-->
       <p>{{ m.strTags }}</p>
     } @else {
       <p>No tags available</p>
-    }
+}
+
+
 
 
     <div class="actions">

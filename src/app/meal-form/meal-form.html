@@ -5,7 +5,6 @@
   <label>
     Name
     <input type="text" formControlName="strMeal"/>
-
   </label>
 
   @if (mealForm.controls.strMeal.touched) {
@@ -21,64 +20,32 @@
       <p class="error">Meal name cannot contain only spaces.</p>
     }
   }
+<!--  <label>-->
+<!--    Image of Meal-->
+<!--    <input type="image" formControlName="strMealThumb"/>-->
+<!--  </label>-->
+<!--  @if (mealForm.controls.str)-->
 
   <label>
     Type
     <input type="text" formControlName="strCategory"/>
   </label>
-  @if (mealForm.controls.strCategory.touched) {
-    @if (mealForm.controls.strCategory.hasError('required')) {
-      <p class="error">Type is required.</p>
-    }
-
-    @if (mealForm.controls.strCategory.hasError('whitespace')) {
-      <p class="error">Type cannot contain only spaces.</p>
-    }
-  }
 
   <label>
     Food Origin
     <input type="text" formControlName="strArea"/>
   </label>
-  @if (mealForm.controls.strArea.touched && mealForm.controls.strArea.touched) {
-    <p class="error">Origin of food is required.</p>
-  }
-
-  <label>
-    Country
-    <input type="text" formControlName="strCountry" />
-  </label>
-  @if (mealForm.controls.strCountry.touched &&
-  mealForm.controls.strCountry.hasError('required')) {
-  <p class="error">Representative country of meal is required.</p>
-  }
 
   <label>
     Instructions
     <input type="text" formControlName="strInstructions" />
   </label>
-  @if (mealForm.controls.strMeal.touched) {
-
-    @if (mealForm.controls.strMeal.hasError('required')) {
-      <p class="error">Meal name is required</p>
-    }
-
-    @if (mealForm.controls.strMeal.hasError('whitespace')) {
-      <p class="error">Meal name cannot contain only spaces.</p>
-    }
-  }
 
   <label>
-    Country
+    Tags
     <input type="text" formControlName="strTags" />
   </label>
 
-  @if (mealForm.controls.strMeal.touched) {
-
-    @if (mealForm.controls.strMeal.hasError('whitespace')) {
-      <p class="error">Meal name cannot contain only spaces.</p>
-    }
-  }
 
 
   <button type="submit" [disabled]="mealForm.invalid">
