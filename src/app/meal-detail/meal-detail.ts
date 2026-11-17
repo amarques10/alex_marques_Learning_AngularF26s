@@ -2,10 +2,12 @@ import { Component, computed, effect, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MealService } from '../services/mealService';
 import { MealApiService } from '../services/meal-api-service';
+import { TruncatePipe } from '../pipes/truncate-pipe';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-meal-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, TruncatePipe, UpperCasePipe],
   templateUrl: './meal-detail.html',
   styleUrl: './meal-detail.scss',
 })

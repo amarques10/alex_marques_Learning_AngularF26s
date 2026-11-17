@@ -21,10 +21,10 @@
 
     @if (m.strInstructions) { <!--Displays the instructions only if the value is defined.-->
       <h2>Cooking Instructions</h2>
-      <p>Instructions: {{ m.strInstructions }}</p>
+      <p>Instructions: {{ m.strInstructions | truncate:60 }}</p>
     }
 
-    @if (m.strTags) { <!--Displays the tags if they are defined-->
+    @if (m.strTags | uppercase | truncate: 30) { <!--Displays the tags if they are defined-->
       <p>{{ m.strTags }}</p>
     } @else {
       <p>No tags available</p>
