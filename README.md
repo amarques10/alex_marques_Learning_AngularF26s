@@ -14,6 +14,36 @@ I also felt like I understood the HttpClient & Observables
 slightly more even if it seemed a little more difficult. 
 I enjoyed the challenge.
 
+## Lazy Loading
+
+### Before:
+```
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-NUEAWBEF.js    | main          | 301.52 kB |                79.93 kB
+styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 301.52 kB |                79.93 kB
+```
+Application bundle generation complete. [4.139 seconds] - 2026-11-17T20:17:23.525Z
+
+### After:
+```
+Initial chunk files | Names          |  Raw size | Estimated transfer size
+chunk-NL3VTEEN.js   | -              | 135.39 kB |                40.51 kB
+chunk-RPXPGAQQ.js   | -              | 124.44 kB |                32.02 kB
+main-2C3V3UFK.js    | main           |   5.63 kB |                 2.01 kB
+styles-5INURTSO.css | styles         |   0 bytes |                 0 bytes
+
+                    | Initial total  | 265.46 kB |                74.54 kB
+
+Lazy chunk files    | Names          |  Raw size | Estimated transfer size
+chunk-UHSXHNHA.js   | meal-form      |  36.03 kB |                 8.22 kB
+chunk-6XZZKKUC.js   | meal-detail    |   2.49 kB |                 1.02 kB
+chunk-AW3J5XJS.js   | page-not-found | 322 bytes |               322 bytes
+
+Application bundle generation complete. [2.008 seconds] - 2026-11-17T20:44:58.828Z
+```
+
 ## Development server
 
 To start a local development server, run:
