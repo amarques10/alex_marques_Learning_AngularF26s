@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { MealListItem, mealEvent } from '../meal-list-item/meal-list-item';
 import { MealService} from '../services/mealService';
 import { MEAL_CONFIG } from '../shared/meal-config';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-meal-list',
-  imports: [MealListItem],
+  imports: [MealListItem, DecimalPipe],
   templateUrl: './meal-list.html',
   styleUrl: './meal-list.scss',
 })

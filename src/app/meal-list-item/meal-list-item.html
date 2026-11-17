@@ -1,6 +1,6 @@
 <div class="meal-card" (click) = toggle()>
 
-  <h3>{{meal().strMeal}}</h3>
+  <h3>{{ meal().strMeal | titlecase }}</h3>
 
   @if (meal().strMealThumb; as imageUrl_) {
     <img class="meal-image"
@@ -13,7 +13,7 @@
   }
 
   @if (meal().strArea) {
-    <p>Origin: {{ meal().strArea}}</p>
+    <p>Origin: {{ meal().strArea | uppercase }}</p>
   }
 
   @if (meal().strTags) {

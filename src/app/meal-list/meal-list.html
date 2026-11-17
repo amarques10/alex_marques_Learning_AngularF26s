@@ -12,6 +12,7 @@
   <p class="error">{{ error() }}</p>
   <button type="button" (click)="search()">Try Again</button>
 } @else {
+  <p>Total Meals: {{ meals().length | number:'1.0-1' }}</p>
   @for ( m of meals(); track m.idMeal) {
     <app-meal-list-item
       [meal]="m"

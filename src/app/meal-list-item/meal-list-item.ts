@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { Meal } from '../shared/models/meal';
 import { RouterLink } from '@angular/router';
+import { TitleCasePipe , UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-meal-list-item',
-  imports: [RouterLink],
+  imports: [RouterLink, TitleCasePipe, UpperCasePipe],
   templateUrl: './meal-list-item.html',
   styleUrl: './meal-list-item.scss',
 })
