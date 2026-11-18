@@ -4,10 +4,11 @@ import { MealService } from '../services/mealService';
 import { MealApiService } from '../services/meal-api-service';
 import { TruncatePipe } from '../pipes/truncate-pipe';
 import { UpperCasePipe } from '@angular/common';
+import { SortPipe } from '../pipes/sort-pipe';
 
 @Component({
   selector: 'app-meal-detail',
-  imports: [RouterLink, TruncatePipe, UpperCasePipe],
+  imports: [RouterLink, TruncatePipe, UpperCasePipe, SortPipe],
   templateUrl: './meal-detail.html',
   styleUrl: './meal-detail.scss',
 })

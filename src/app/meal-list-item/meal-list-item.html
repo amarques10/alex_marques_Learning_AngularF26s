@@ -17,7 +17,7 @@
   }
 
   @if (meal().strTags) {
-    <p>Tags: {{ meal().strTags }}</p>
+    <p>Tags: {{ meal().strTags | sort }}</p>
   }
 
   <a [routerLink]="['/meals', meal().idMeal]">View Details</a>
