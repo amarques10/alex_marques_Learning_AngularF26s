@@ -3,10 +3,11 @@ import { Meal } from '../shared/models/meal';
 import { RouterLink } from '@angular/router';
 import { TitleCasePipe , UpperCasePipe } from '@angular/common';
 import { SortPipe } from '../pipes/sort-pipe';
+import { Highlight } from '../directives/highlight';
 
 @Component({
   selector: 'app-meal-list-item',
-  imports: [RouterLink, TitleCasePipe, UpperCasePipe, SortPipe],
+  imports: [RouterLink, TitleCasePipe, UpperCasePipe, SortPipe, Highlight],
   templateUrl: './meal-list-item.html',
   styleUrl: './meal-list-item.scss',
 })
@@ -26,6 +27,8 @@ export class MealListItem {
 
     this.removed.emit({ idMeal: this.meal().idMeal, action: 'removed' });
   }
+
+  protected readonly Highlight = Highlight;
 }
 export interface mealEvent {
   idMeal: string;

@@ -1,6 +1,6 @@
 <div class="meal-card" (click) = toggle()>
 
-  <h3>{{ meal().strMeal | titlecase }}</h3>
+  <h3 appHighlight>{{ meal().strMeal | titlecase }}</h3>
 
   @if (meal().strMealThumb; as imageUrl_) {
     <img class="meal-image"

@@ -5,10 +5,11 @@ import { MealApiService } from '../services/meal-api-service';
 import { TruncatePipe } from '../pipes/truncate-pipe';
 import { UpperCasePipe } from '@angular/common';
 import { SortPipe } from '../pipes/sort-pipe';
+import { Highlight } from '../directives/highlight';
 
 @Component({
   selector: 'app-meal-detail',
-  imports: [RouterLink, TruncatePipe, UpperCasePipe, SortPipe],
+  imports: [RouterLink, TruncatePipe, UpperCasePipe, SortPipe, Highlight],
   templateUrl: './meal-detail.html',
   styleUrl: './meal-detail.scss',
 })

@@ -4,7 +4,7 @@
   <p class="error">{{ error() }}</p>
 } @else if (meal(); as m) {
   <article class = "detail">
-    <h2>{{ m.strMeal }}</h2>
+    <h2 appHighlight="#FDE7C8">{{ m.strMeal }}</h2>
 
     @if (m.strMealThumb) {
       <img [src]="m.strMealThumb"
