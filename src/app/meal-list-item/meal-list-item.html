@@ -22,6 +22,8 @@
 
   <a [routerLink]="['/meals', meal().idMeal]">View Details</a>
 
-  <button type="button" (click) = "remove($event);">Remove</button>
+  <button type="button" appConfirm="Delete this meal?" (confirmed)= "remove()">
+    Remove
+  </button>
 </div>
 

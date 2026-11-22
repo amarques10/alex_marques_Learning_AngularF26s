@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { TitleCasePipe , UpperCasePipe } from '@angular/common';
 import { SortPipe } from '../pipes/sort-pipe';
 import { Highlight } from '../directives/highlight';
+import { AppConfirm } from '../directives/app-confirm';
 
 @Component({
   selector: 'app-meal-list-item',
-  imports: [RouterLink, TitleCasePipe, UpperCasePipe, SortPipe, Highlight],
+  imports: [RouterLink, TitleCasePipe, UpperCasePipe, SortPipe, Highlight, AppConfirm],
   templateUrl: './meal-list-item.html',
   styleUrl: './meal-list-item.scss',
 })
@@ -22,9 +23,7 @@ export class MealListItem {
     this.expanded = !this.expanded;
     this.opened.emit({ idMeal: this.meal().idMeal, action: 'opened' });
   }
-  remove(event: MouseEvent): void {
-    event.stopPropagation();
-
+  remove(): void {
     this.removed.emit({ idMeal: this.meal().idMeal, action: 'removed' });
   }
 

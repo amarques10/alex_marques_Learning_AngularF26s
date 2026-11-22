@@ -30,5 +30,6 @@ export class MealList {
 
   protected handleMealEvent(meal: mealEvent): void {
     console.log('Meal removed: ', meal);
+    this.mealService.remove(meal.idMeal);
   }
 }
