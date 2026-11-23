@@ -2,6 +2,15 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
 
+## Local Storage
+I chose to store the preference of having light or dark modes.
+The reason for this choice is because in most cases I tend to
+use dark mode while browsing the internet. For me this just
+felt like a good opportunity to try and implement and light
+and dark mode.
+
+We should never store secrets, any script on the page can read 
+it meaning no passwords or tokens.
 ## API Used
 The API that will be used for this webpage is TheMealDB. The documentation for this DB can be found here: https://www.themealdb.com/documentation.
 

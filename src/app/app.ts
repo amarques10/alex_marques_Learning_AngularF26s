@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { EditPermission } from './services/edit-permission';
+import { ThemeService } from './services/theme-service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
@@ -11,5 +12,6 @@ export class App {
   protected readonly title = signal('alex_marques_Learning_AngularF26');
 
   protected editPermission = inject(EditPermission);
+  protected themeService = inject(ThemeService);
 
 }

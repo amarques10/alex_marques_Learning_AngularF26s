@@ -1,0 +1,10 @@
+<h2>Saved Meals</h2>
+
+@for ( meal of savedMeals(); track meal.idMeal) {
+  <div class="saved-meal">
+    <a [routerLink]="['/meals', meal.idMeal]">{{ meal.strMeal }}</a>
+  </div>
+}@empty {
+<p>No meals to display yet! Save some meals.</p>
+}
+

@@ -6,6 +6,10 @@
   <article class = "detail">
     <h2 appHighlight="#FDE7C8">{{ m.strMeal }}</h2>
 
+    <button (click)="savedService.toggle(m.idMeal)">
+      {{ savedService.isSaved(m.idMeal) ? 'Unsave' : 'Save' }}
+    </button>
+
     @if (m.strMealThumb) {
       <img [src]="m.strMealThumb"
            [alt]="m.strMeal" />

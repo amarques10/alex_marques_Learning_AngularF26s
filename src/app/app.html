@@ -1,10 +1,15 @@
 
-<div class = "container">
+<div class = "container" [class.dark-theme]="themeService.currentTheme() === 'dark'//">
   <h2>MealService List</h2>
 
   <nav>
     <a routerLink="/meals">All Meals</a>
     <a routerLink="/add">Add Meal</a>
+    <a routerLink="/saved">Saved Meals</a>
+
+    <button type="button" (click)="themeService.toggle()">
+      {{ themeService.currentTheme() === 'light' ? 'Dark Mode' : 'Light Mode' }}
+    </button>
 
     <button type="button" (click)="editPermission.toggleEditing()">
     {{ editPermission.guardEnabled() ? 'Lock editing' : 'Unlock Editing' }}

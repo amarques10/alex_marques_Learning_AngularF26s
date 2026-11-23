@@ -6,6 +6,7 @@ import { TruncatePipe } from '../pipes/truncate-pipe';
 import { UpperCasePipe } from '@angular/common';
 import { SortPipe } from '../pipes/sort-pipe';
 import { Highlight } from '../directives/highlight';
+import { SavedService } from '../services/saved-service';
 
 @Component({
   selector: 'app-meal-detail',
@@ -15,6 +16,7 @@ import { Highlight } from '../directives/highlight';
 })
 export class MealDetail {
   protected store = inject(MealService);
+  protected savedService = inject(SavedService);
 
   id = input.required<string>();
 

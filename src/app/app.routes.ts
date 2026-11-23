@@ -17,6 +17,10 @@ export const routes: Routes = [
   loadComponent: () => import('./meal-form/meal-form').then(m => m.MealForm),
   },
 
+  {path: 'saved',
+  loadComponent: () => import('./saved/saved').then(m => m.Saved),
+  },
+
   { path: '**',
   loadComponent: () => import('./page-not-found/page-not-found').then(m => m.PageNotFound),
   }, //404 must be last
