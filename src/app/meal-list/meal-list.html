@@ -16,6 +16,7 @@
   @for ( m of meals(); track m.idMeal) {
     <app-meal-list-item
       [meal]="m"
+      highlightColor="#FDE7C8"
       (opened)="onMealOpened($event)"
       (removed)="handleMealEvent($event)"
     />

@@ -8,7 +8,13 @@ import { AppConfirm } from '../directives/app-confirm';
 
 @Component({
   selector: 'app-meal-list-item',
-  imports: [RouterLink, TitleCasePipe, UpperCasePipe, SortPipe, Highlight, AppConfirm],
+  imports: [RouterLink, TitleCasePipe, UpperCasePipe, SortPipe, AppConfirm],
+  hostDirectives: [
+    {
+      directive: Highlight,
+      inputs: ['appHighlight: highlightColor']
+    }
+  ],
   templateUrl: './meal-list-item.html',
   styleUrl: './meal-list-item.scss',
 })
