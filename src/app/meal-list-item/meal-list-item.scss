@@ -4,14 +4,12 @@
 }
 
 .meal-card {
-  background-color: transparent;
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
   padding: 15px;
 }
 
 .meal-list {
-  border: 2px solid black;
+  border: 2px solid var(--mat-sys-outline);
 }
 
-.meal-list {
-  border: 2px solid black;
-}

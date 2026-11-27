@@ -2,6 +2,13 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
 
+### Angular Material
+Primary Color: #4CAF50
+
+I chose this primary color because I figured a green would fit the idea of meals. Some meals contain types of
+brown colors and possibly green if there are salads. I think this mimics the natural beauty of nature with how 
+leaves are green and tree trunks are brown.
+
 ## Local Storage
 I chose to store the preference of having light or dark modes.
 The reason for this choice is because in most cases I tend to
