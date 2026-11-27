@@ -2,53 +2,84 @@
 
 <form class="meal-form" [formGroup]="mealForm" (ngSubmit)="onSubmit()">
 
-  <label>
-    Name
-    <input type="text" formControlName="strMeal"/>
-  </label>
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput #mealName type="text" formControlName="strMeal"/>
+    <mat-hint>Enter the full name of the meal.</mat-hint>
+  </mat-form-field>
 
-  @if (mealForm.controls.strMeal.touched) {
-    @if (mealForm.controls.strMeal.hasError('required')) {
-      <p class="error">Meal name is required</p>
-    }
-
-    @if (mealForm.controls.strMeal.hasError('minlength')) {
-      <p class="error">Meal name must be at least 2 characters.</p>
-    }
-
-    @if (mealForm.controls.strMeal.hasError('whitespace')) {
-      <p class="error">Meal name cannot contain only spaces.</p>
-    }
+  @if (mealForm.controls.strMeal.hasError('required')) {
+    <mat-error>Meal name is required</mat-error>>
   }
+
+  @if (mealForm.controls.strMeal.hasError('minlength')) {
+    <mat-error>Meal name must be at least 2 characters.</mat-error>
+  }
+
+  @if (mealForm.controls.strMeal.hasError('whitespace')) {
+    <mat-error>Meal name cannot contain only spaces.</mat-error>
+  }
+
 <!--  <label>-->
 <!--    Image of Meal-->
 <!--    <input type="image" formControlName="strMealThumb"/>-->
 <!--  </label>-->
 <!--  @if (mealForm.controls.str)-->
 
-  <label>
-    Type
-    <input type="text" formControlName="strCategory"/>
-  </label>
+  <mat-form-field appearance="outline">
+    <mat-label>Type</mat-label>
 
-  <label>
-    Food Origin
-    <input type="text" formControlName="strArea"/>
-  </label>
+    <mat-select formControlName="strCategory">
+      @for (category of categories; track category) {
+        <mat-option [value]="category">
+          {{ category }}
+        </mat-option>
+      }
+    </mat-select>
+    <mat-hint>Select the category that best describes your meal.</mat-hint>
 
-  <label>
-    Instructions
-    <input type="text" formControlName="strInstructions" />
-  </label>
+    @if (mealForm.controls.strCategory.hasError('required')) {
+      <mat-error>Please select a category</mat-error>
+    }
 
-  <label>
-    Tags
-    <input type="text" formControlName="strTags" />
-  </label>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Food Origin</mat-label>
+    <input matInput type="text" formControlName="strArea"/>
+    <mat-hint>Example: Portuguese, Italian, Canadian.</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Instructions</mat-label>
+    <input matInput type="text" formControlName="strInstructions" />
+    <mat-hint>Describe how you prepare this meal.</mat-hint>
+
+    @if (mealForm.controls.strInstructions.hasError('required')) {
+      <mat-error>Please enter Instruction to preparing meal.</mat-error>>
+    }
+
+    @if (mealForm.controls.strInstructions.hasError('whitespace')) {
+      <mat-error>Instructions can not contain only spaces.</mat-error>
+    }
+
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tags</mat-label>
+    <input matInput type="text" formControlName="strTags" />
+    <mat-hint>Separate the Tags with commas</mat-hint>
+
+    @if (mealForm.controls.strTags.hasError('whitespace')) {
+      <mat-error>Tags can not contain only spaces.</mat-error>
+    }
+
+  </mat-form-field>
 
 
 
-  <button type="submit" [disabled]="mealForm.invalid">
+  <button matButton="filled" type="submit" [disabled]="mealForm.invalid">
     {{ isEditMode() ? 'Save Changes' : 'Add Meal'}}
   </button>
+  <a matButton="outlined" routerLink="/meals">Cancel</a>
 </form>
